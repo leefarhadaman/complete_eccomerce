@@ -1,10 +1,11 @@
+import 'package:eccomerceapp/screens/product_details_screen.dart';
 import 'package:flutter/material.dart';
 import '../models/product_model.dart';
 
 class FeaturedProducts extends StatelessWidget {
   final List<Product> products;
 
-  const FeaturedProducts({required this.products});
+  const FeaturedProducts({super.key, required this.products});
 
   @override
   Widget build(BuildContext context) {
@@ -15,31 +16,39 @@ class FeaturedProducts extends StatelessWidget {
         itemCount: products.length,
         itemBuilder: (context, index) {
           final product = products[index];
-          return Container(
-            width: 160,
-            margin: EdgeInsets.symmetric(horizontal: 8),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(12),
-                    child: Image.network(
-                      product.images.first,
-                      fit: BoxFit.cover,
-                      width: double.infinity,
+          return GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => ProductDetailsScreen(),
+                ),
+              );
+            },
+            child: Container(
+              width: 160,
+              margin: EdgeInsets.symmetric(horizontal: 8),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(12),
+                      child: Image.network(
+                        product.images.first,
+                        fit: BoxFit.cover,
+                        width: double.infinity,
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(height: 8),
-                Text(
-                  product.name,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
+                  SizedBox(height: 8),
+                  Text(
+                    product.name,
+                    style: TextStyle(fontWeight: FontWeight.bold),
                   ),
-                ),
-                Text('\$${product.price.toStringAsFixed(2)}'),
-              ],
+                  Text('\$${product.price.toStringAsFixed(2)}'),
+                ],
+              ),
             ),
           );
         },

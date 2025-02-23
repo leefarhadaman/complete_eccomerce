@@ -6,6 +6,10 @@ import '../models/product_model.dart';
 import '../utils/animations.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
+  final String? productId;
+
+  const ProductDetailsScreen({Key? key, this.productId}) : super(key: key);
+
   @override
   _ProductDetailsScreenState createState() => _ProductDetailsScreenState();
 }
